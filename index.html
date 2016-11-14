@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+						<section>
+							<h3> S14: Hypothesis-Free Search for Connections between Birth Month and Disease Prevalence in Large, Geographically Varied Cohorts </h3>
+							<p> John Borsi - Data Scientist, IBM Watson Health </p>
+						</section>
+						<section>
+							<h3> Disclosure </h3>
+							I am employed as a Data Scientist for IBM Watson Health
+						</section>
+						<section>
+							<h3> Learning Objectives </h3>
+							After participating in this activity, the learner should be better able to:
+							<ul>
+									<li> Understand the connection between birth month and lifetime health </li>
+									<li> Apply statistical techniques to find connections in large health care data sets </li>
+							</ul>
+						</section>
+				</section>
+
+				<section>
+					<h1>Of Birthdays And Big Data</h1>
+					<!--<h3>Massive Observational Health Data Analyses and Their Implications</h3> -->
+				</section>
+
+				<section>
+					<section>
+						<h3> What time of the year you're born has measurable impacts on <em>lifelong</em> health </h3>
+					</section>
+					<section>
+						<h3> Neurological </h3>
+						<h5 class='fragment'> &ldquo;Neonatal vitamin D status and risk of <strong>schizophrenia</strong>" </h5>
+						<small class='fragment'> 2010, Archives of General Psychiatry. </small>
+						<h5 class='fragment'> &ldquo;Relative Immaturity and <strong>ADHD</strong>" </h5>
+						<small class='fragment'> 2014, Journal of Child Psychology and Psychiatry </small>
+						<h5 class='fragment'> &ldquo;Timing of birth and risk of <strong> multiple sclerosis</strong>" </h5>
+						<small class='fragment'> 2005, BMJ </small>
+					</section>
+					<section>
+						<h3> Reproductive </h3>
+						<h5 class='fragment'> &ldquo;Month of birth and <strong>offspring count</strong> of women" </h5>
+						<small class='fragment'> 2008, Human Reproduction </small>
+						<h5 class='fragment'> &ldquo;The impact of maternal birth month on <strong>reproductive performance"</strong></h5>
+						<small class='fragment'> 2010, Journal of Biosocial Science </small>
+					</section>
+					<section>
+						<h3> Endocrine </h3>
+						<h5 class='fragment'> &ldquo;Association of <strong>type 1 diabetes</strong> with month of birth among US youth"</h5>
+						<small class='fragment'> 2009, Diabetes Care </small>
+					</section>
+					<section>
+						<h3> Immune disorders </h3>
+						<h5 class='fragment'> &ldquo;Month of birth, vitamin D and risk of <strong>immune mediated disease</strong>"</h5>
+						<small class='fragment'> 2012, BMC Medicine </small>
+					</section>
+					<section>
+						<h3> Overall Longevity </h3>
+						<h5 class='fragment'> &ldquo;<strong>Lifespan</strong> depends on month of birth."</h5>
+						<small class='fragment'> 2001, Proceedings of the National Academy of Sciences </small>
+					</section>
+					<section>
+						<h4> And more... </h4>
+						<h5 class='fragment'> Boland, <em>et al's</em> search of PubMed revealed 92 articles pertaining to 16 different conditions </h5>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3> Big observational data sets are an obvious way to search for these connections <em>systematically</em> </h3>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Case Study 1</h3>
+						<h4>On the Effects of Pre-Natal Super Bowl Exposure</h4>
+					</section>
+					<section>
+						<h5>&ldquo;It's Just a Game: The Super Bowl and Low Birth Weight"</h5>
+						<small> 2016, Journal of Human Resources </small>
+					</section>
+					<section>
+							<h3> 29 Million Births over 40 years </h3>
+							<p class='fragment'> National Vital Statistics System </p>
+					</section>
+					<section>
+							<h3> Prenatal exposure to a super bowl increases change of low birth weight (p < .01)</h3>
+					</section>
+					<section>
+						<img data-src="./superbowldata.png">
+					</section>
+					<section>
+						<h3> Weaknesses of this approach </h3>
+							<p class='fragment'> Overstated sample size </p>
+							<p class='fragment'> Hidden hypothesis-generation step </p>
+							<p class='fragment'> No statistical correction </p>
+					</section>
+					<section>
+						<blockquote cite="It's Just a Game: The Super Bowl and Low Birth Weight">
+						"Our results suggest that informational campaigns aimed at encouraging pregnant women to avoid emotionally charged but otherwise ordinary events could lead to healthier babies"
+						</blockquote>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Case Study 2</h3>
+						<h4>Season-Wide Association Study <em>(SeaWAS)</em></h4>						
+					</section>
+					<section>
+							<img data-src="./bolandheader.png" style="border: 0;">
+					</section>
+					<section>
+							<h3> 1.7 M Patients over 28 years</h3>
+							Columbia University Medical Center
+					</section>
+					<section>
+							 Lifetime risk of disease tied to month of birth
+					</section>
+					<section>
+						<img data-src="./bolandtable.png">
+					</section>
+					<section>
+						<h3> Strengths of Boland, <em>et al's </em> approach </h3>
+						<p class='fragment'> Accurate reporting of sample size </p>
+						<p class='fragment'> Upfront about hypothesis generation </p>
+						<p class='fragment'> Statistical correction </p>
+					</section>
+					<section>
+						<h3> Limitations of Study </h3>
+					</section>
+					<section>
+						<h3> Sidebar: Dealing with Multiple Comparisons </h3>
+					</section>
+					<section>
+						<img data-src='multcorrection.png'>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Case Study 3</h3>
+						<h4>Multi-cohort Follow-Up to <em>SeaWAS</em></h4>						
+					</section>
+					<section>
+							<h5>&ldquo;Hypothesis-Free Search for Connections between Birth Month and Disease Prevalence in Large, Geographically Varied Cohorts"</h5> 
+							<small>AMIA 2016</small> 
+					</section>
+					<section>
+							<h3> 11.8 M Patients from multiple sources </h3>
+							<small>IBM Explorys Life Sciences Data Set</small>
+							<p>
+							<ul>
+									<li class='fragment'> 3 distinct geographical regions </li>
+									<li class='fragment'> Different types of data sources </li> 
+							</ul>
+					</section>
+					<section>
+							<h3> Findings </h3>
+							<ul>
+									<li class='fragment'> Geography and Data Source matter </li>
+									<li class='fragment'> Holm multiplicity correction produces more reproducible results </li>
+							</ul>
+					</section>
+					<section>
+						<img data-src="./borsitable.png">
+					</section>
+					<section>
+						<blockquote>
+							"It is clear that this approach can be a powerful hypothesis generator and tool for investigating the role of seasonally dependent early developmental mechanisms in general health, but obtaining generalizable results requires evaluating different sets of data and accounting for potential biases."
+						</blockquote>
+					</section>
+				</section>
+
+				<section>
+					<section>
+					<h2> Takeaways </h2>
+					</section>
+					<section>
+					Lifetime impact of pre-/peri- natal environment
+					<p class='fragment'> Data source specific bias
+					<p class='fragment'> Multiplicity corrections	
+					</section>
+				</section>
+
+				<section>
+						<h3> Questions? </h3>
+						<small>John Borsi - jborsi@us.ibm.com - @jpborsi</small> 
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
